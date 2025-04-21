@@ -50,6 +50,29 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += [
+        "debug_toolbar"
+    ]
+
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware"
+    ]
+
+    import socket
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname()) 
+    docker_ips = [ip[:-1]+"1" for ip in ips]
+
+    INTERNAL_IPS = docker_ips + ["127.0.0.1"]
+
+    #Adding this config will tell which IP address is needed to add INTERNAL_IPS, but will also make it so the toolbar never shows
+    #If needed add the config, look at IP, and thene remove  the config
+
+    #DEBUG_TOOLBAR_CONFIG = {
+    #    'SHOW_TOOLBAR_CALLBACK': lambda request: print(request,META), 
+    #}
+
 ROOT_URLCONF = 'level_up.urls'
 
 TEMPLATES = [
