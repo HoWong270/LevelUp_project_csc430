@@ -2,9 +2,13 @@
 
 {% block content %}
     <h1>Edit Article</h1>
+    <p>Last edited on {{ articles.updated_at }}</p>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p}}
         <button type="submit">Save</button>
     </form>
+
+    <a href="{% url 'home' %}">Back to the list</a>
+    <a href="{% url 'delete_article' articles.id %}">Delete Article</a>
 {% endblock content%}

@@ -34,6 +34,7 @@ class ArticleDeleteView(DeleteView):
     template_name = "app/article_delete.html"
     model = Article
     success_url = reverse_lazy("home")
+    context_object_name = "articles"
 
 
 
