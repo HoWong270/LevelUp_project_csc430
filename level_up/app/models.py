@@ -13,8 +13,11 @@ ARTICLE_STATUS = (
     ("published","published"),
 )
 
-
+# -------------------------------
+# Custom User Model
+# -------------------------------
 class UserProfile(AbstractUser):
+    # Override the default username field with a unique email field
     email = models.EmailField(_("email address"),max_length=255,unique=True)
 
     objects = UserProfileManager()
@@ -22,6 +25,9 @@ class UserProfile(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+# -------------------------------
+# Article Model
+# -------------------------------
 class Article(models.Model):
     title = models.CharField(_("title"),max_length=100)
     content = models.TextField(_("content"),blank=True, default="")
@@ -33,10 +39,16 @@ class Article(models.Model):
         choices=ARTICLE_STATUS,
         default="draft",
     )
+    # Timestamps for creation and update
     created_at = models.DateTimeField(_("created at"),auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"),auto_now=True)
+    # Reference to the user who created the article
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,verbose_name=_("creator"), on_delete = models.CASCADE, related_name="articles")
 
+    # -------------------------------
+    # Overriding save() method
+    # -------------------------------
+    # This method calculates the word count of the content before saving.
     def save(self, *args, **kwargs):
         text = re.sub(r"<[^>]*","",self.content).replace("&nbsp;","")
         self.word_count = len(re.findall(r"\b\w+\b",text))
