@@ -6,6 +6,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
 
 class ArticleListView(ListView):
