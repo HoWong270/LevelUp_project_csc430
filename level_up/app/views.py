@@ -6,29 +6,47 @@ from app.models import Article
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
-#LoginRequireMixin verifies user must be logged in, in order to see, create
-#and delete articles. get_queryset function allows the users to view articles, that they created
+
+# This view displays a list of articles.
+# Only logged-in users can access this view, enforced by LoginRequiredMixin.
+# It filters the queryset to show only the articles created by the currently logged-in user.
 class ArticleListView(LoginRequiredMixin,ListView):
     template_name = "app/home.html"
     model = Article
     context_object_name = "articles"
 
+
+    # This method customizes the queryset to show only articles
+    # created by the logged-in user, ordered by creation time (newest first)
     def get_queryset(self) -> QuerySet[Any]:
         return Article.objects.filter(creator=self.request.user).order_by("-created_at")
 
 
+
+# -------------------------------
+# ArticleCreateView
+# -------------------------------
+# This view handles article creation.
+# Only logged-in users can create articles (LoginRequiredMixin).
 class ArticleCreateView(LoginRequiredMixin,CreateView):
     template_name = "app/article_create.html"
     model = Article
     fields = ["title","status","content","twitter_post"]
     success_url = reverse_lazy("home")
 
+     # This method sets the creator of the article to the currently logged-in user
     def form_valid(self, form):
         form.instance.creator = self.request.user
         return super().form_valid(form)
     
 
-#UserPassesTextMixin, overrides test in order to access this page 
+
+# -------------------------------
+# ArticleUpdateView
+# -------------------------------
+# This view handles updating articles.
+# Only logged-in users can access it (LoginRequiredMixin).
+# UserPassesTestMixin ensures only the creator of the article can update it.
 class ArticleUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     template_name = "app/article_update.html"
     model = Article
@@ -40,13 +58,18 @@ class ArticleUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     def test_func(self) -> bool | None:
         return self.request.user == self.get_object().creator
 
-
+# -------------------------------
+# ArticleDeleteView
+# -------------------------------
+# This view handles deleting articles.
+# Only the logged-in user who created the article can delete it.
 class ArticleDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     template_name = "app/article_delete.html"
     model = Article
     success_url = reverse_lazy("home")
     context_object_name = "articles"
 
+     # Only allow deletion if the user is the creator of the article
     def test_func(self) -> bool | None:
         return self.request.user == self.get_object().creator
 
