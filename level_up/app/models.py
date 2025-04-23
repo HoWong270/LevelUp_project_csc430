@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
+from app.managers import UserProfileManager
+
 ARTICLE_STATUS = (
     ("draft","draft"),
     ("in progress","in progress"),
@@ -13,7 +15,12 @@ ARTICLE_STATUS = (
 
 
 class UserProfile(AbstractUser):
-    pass
+    email = models.EmailField(_("email address"),max_length=255,unique=True)
+
+    objects = UserProfileManager()
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
 class Article(models.Model):
     title = models.CharField(_("title"),max_length=100)
