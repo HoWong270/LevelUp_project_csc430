@@ -1,6 +1,7 @@
 import re
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
@@ -15,18 +16,19 @@ class UserProfile(AbstractUser):
     pass
 
 class Article(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField(blank=True, default="")
-    word_count = models.IntegerField(blank = True, default="")
-    twitter_post = models.TextField(blank=True,default="")
+    title = models.CharField(_("title"),max_length=100)
+    content = models.TextField(_("content"),blank=True, default="")
+    word_count = models.IntegerField(_("word count"),blank = True, default="")
+    twitter_post = models.TextField(_("twitter post"),blank=True,default="")
     status = models.CharField(
+        _("status"),
         max_length=20,
         choices=ARTICLE_STATUS,
         default="draft",
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name="articles")
+    created_at = models.DateTimeField(_("created at"),auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated at"),auto_now=True)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,verbose_name=_("creator"), on_delete = models.CASCADE, related_name="articles")
 
     def save(self, *args, **kwargs):
         text = re.sub(r"<[^>]*","",self.content).replace("&nbsp;","")
