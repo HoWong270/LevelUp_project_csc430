@@ -12,6 +12,11 @@ class ArticleAdmin(admin.ModelAdmin):
     readonly_fields = ("word_count","created_at","updated_at")
 
 
+
+# -------------------------------------------
+# Custom admin configuration for UserProfile model
+# Extends the built-in Django UserAdmin
+# -------------------------------------------
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields":("email","password")}),
