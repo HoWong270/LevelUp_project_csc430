@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LevelUp</title>
     <!--https://github.com/Ionaru/easy-markdown-editor?tab=readme-ov-file#quick-access-->
+    <link rel="stylesheet" href={% static 'output.css' %}>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
     <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
 </head>
 <body>
-    <nav>
+    <nav class = "px-10 py-4 border-b border-gray-300 shadow-md">
         <ul>
             <li><a href="{% url 'home'%}">Articles</a></li>
             <li>

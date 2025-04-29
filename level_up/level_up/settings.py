@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-!sxj0!qrafgvawzsod0x^(hrq3=20-a4e#k1@(6oyn2_&jf^r%
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.1.182'
+    '192.168.1.182',
+    'localhost',
+    '127.0.0.1',
 ]
 
 #Allows logging in by email, instead of being alwyas requiring username
@@ -178,6 +180,8 @@ LOCALE_PATHS = [
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [ BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
