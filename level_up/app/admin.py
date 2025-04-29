@@ -30,8 +30,8 @@ class CustomUserAdmin(UserAdmin):
             "fields": ("email","password1","password2")
             }),
     )
-    list_display = ("email","is_stuff","is_active")
-    list_filter = ("is_stuff","is_active")
+    list_display = ("email","is_staff","is_active")
+    list_filter = ("is_staff","is_active")
     search_fields = ("email",)
     ordering = ("email",)
 
