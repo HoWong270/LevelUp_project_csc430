@@ -15,7 +15,8 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-root
 
 COPY . .
+RUN chmod 755 /code/start-level_up.sh
 
 EXPOSE 8000
 
-ENTRYPOINT [ "poetry","run","python","manage.py","runserver","0.0.0.0:8000"]
+ENTRYPOINT [ "/code/start-level_up.sh"]

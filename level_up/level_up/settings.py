@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-!sxj0!qrafgvawzsod0x^(hrq3=20-a4e#k1@(6oyn2_&jf^r%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.1.182'
+]
 
 #Allows logging in by email, instead of being alwyas requiring username
 AUTHENTICATION_BACKENDS = [
