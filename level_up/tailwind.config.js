@@ -5,13 +5,7 @@
                     "./**/*.py"
         ],
         safelist: ['button', 'primary', 'secondary', 'danger'],
-        theme: {
-          extend: {
-            boxShadow: {
-              underline: "inset 0 -2px 0 0"
-            }
-          },
-        },
+        theme: {},
         plugins: [
           require("@tailwindcss/forms"),
           require("@tailwindcss/typography"),
