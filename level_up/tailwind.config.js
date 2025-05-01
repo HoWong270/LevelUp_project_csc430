@@ -1,8 +1,8 @@
     /** @type {import('tailwindcss').Config} */
     module.exports = {
-        content: [  "../templates/**/*.html",
+        content: [  "./templates/**/*.html",
         ],
-        safelist: ['button', 'primary', 'secondary', 'danger'],
+        safelist: ['button', 'primary', 'secondary', 'danger','mb-4'],
         theme: {},
         plugins: [
           require("@tailwindcss/forms"),
