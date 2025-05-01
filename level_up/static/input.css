@@ -2,8 +2,7 @@
 @import "tailwindcss";
 @config "./tailwind.config.js";
 
-@tailwind base;
-@tailwind components;
+@import "tailwindcss/preflight";
 @tailwind utilities;
 
 
