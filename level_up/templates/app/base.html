@@ -20,7 +20,7 @@
                 {% if user.is_authenticated %}
                     <a 
                         class="button primary" 
-                        href="{% {% spaceless %}{% endspaceless %}%} {% if request.path != create_new_url %} {{create_new_url}} {% else %} # {% endif %}{% endspaceless%}">
+                        href="{% spaceless %}{% if request.path != create_new_url %} {{create_new_url}} {% else %} # {% endif %}{% endspaceless%}">
                         Create New
                     </a>
                     <a 

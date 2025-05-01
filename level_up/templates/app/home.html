@@ -2,7 +2,7 @@
 {% load humanize %}
 
 {% block content %}
-    <h1>Articles</h1>
+<h1 class="text-6xl font-semibold">Welcome</h1>
 
     <p>
         You have created {{ user.article_count | intcomma }}
@@ -22,4 +22,4 @@
     {% else %}
         <p>You have no articles yet.</p>
     {% endif %}
-{% endblock content%}
+{% endblock content %}
