@@ -2,7 +2,7 @@
     module.exports = {
         content: [  "./templates/**/*.html",
         ],
-        safelist: ['button', 'primary', 'secondary', 'danger','mb-4'],
+        safelist: ['button', 'primary', 'secondary', 'danger'],
         theme: {},
         plugins: [
           require("@tailwindcss/forms"),
