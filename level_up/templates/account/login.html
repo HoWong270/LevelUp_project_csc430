@@ -45,8 +45,8 @@
 
             <button type="submit" class="button primary w-full text-sm">Sign in</button>
 
-            {% if SOCIAL_ACCOUNT_ENABLED %}
-                {% include "socialaccount/snippets/login.html" with page_layouts="entrance" %}
+            {% if SOCIALACCOUNT_ENABLED %}
+                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
             {% endif %}    
         </form>
     </div>
