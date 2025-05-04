@@ -13,9 +13,9 @@
         <form method="POST" class="space-y-6 mb-4">
             {% csrf_token %}
             {% if form.errors %}
-                {% for field, errors in form.errors.items%}
-                    {%for error in errors%}
-                        <div>
+                {% for field, errors in form.errors.items %}
+                    {%for error in errors %}
+                        <div class="p-2 y-2 text-sm text-red-700 bg-red-50 rounded-md border-red-300 border">
                             {{ error }}
                         </div>
                     {% endfor %}

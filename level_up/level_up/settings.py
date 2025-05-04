@@ -157,8 +157,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LOGIN_URL = "/accounts/login/"
-LOGOUT_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "/articles/"
+LOGOUT_REDIRECT_URL = ""
 ACCOUNTS_LOGOUT_REDIRECT_URL = "/accounts/login/"
+ACCOUNT_SIGNUP_REDIRECT_URL = "/articles/"
+
 
 #Allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = "email"
