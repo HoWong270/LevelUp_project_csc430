@@ -45,6 +45,10 @@
   }
 
 
+  .form-field input {
+    @apply w-full rounded-md p-2;
+  }
+
 
 
 
