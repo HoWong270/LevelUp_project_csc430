@@ -51,6 +51,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -111,6 +112,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -154,8 +156,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "account_login"
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = ""
+ACCOUNTS_LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 #Allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = "email"

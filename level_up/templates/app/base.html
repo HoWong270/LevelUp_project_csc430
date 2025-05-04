@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LevelUp</title>
     <!--https://github.com/Ionaru/easy-markdown-editor?tab=readme-ov-file#quick-access-->
-    <link rel="stylesheet" href={% static 'output.css' %}>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'output.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
     <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    
 </head>
 <body>
     {% url 'create_article' as create_new_url %}

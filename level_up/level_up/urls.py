@@ -20,10 +20,11 @@ from django.views.generic.base import RedirectView
 from django.urls import reverse_lazy
 
 urlpatterns = [
+
     path("", RedirectView.as_view(url=reverse_lazy("account_login"))),
     path("accounts/",include("allauth.urls")),
     path("admin/", admin.site.urls),
-    path("articles/",include("app.urls")),    
+    path("articles/",include("app.urls")), 
     #path("",RedirectView.as_view(pattern_name ="home")),    
     path("__debug__/",include("debug_toolbar.urls")),
     path("__reload__/",include("django_browser_reload.urls")),
