@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from app.views import (
     ArticleListView,
     ArticleCreateView,
@@ -15,4 +16,5 @@ urlpatterns = [
     # <int:pk> captures the primary key (ID) of the article to update
     path("<int:pk>/update/",ArticleUpdateView.as_view(), name = "update_article"),
     path("<int:pk>/delete/",ArticleDeleteView.as_view(), name = "delete_article"),
+    path("internships/", views.internship_view, name ='internship_list'),
 ]

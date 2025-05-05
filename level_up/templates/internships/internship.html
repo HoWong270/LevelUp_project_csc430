@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internship Catalog</title>
+</head>
+<body>
+    <h1>Available Internships</h1>
+    <ul>
+        {% for internship in internships %}
+        <li>
+            <strong>{{ internship.title }}</strong> at {{ internship.company }}<br>
+            <em>{{ internship.location }}</em><br>
+            <p>{{ internship.description }}</p>
+            {% if internship.application_link %}
+                <a href="{{ internship.application_link }}" target="_blank">Apply Here</a>
+            {% endif %}
+            <hr>
+        </li>
+        {% empty %}
+        <li>No internships posted yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
