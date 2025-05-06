@@ -1,5 +1,6 @@
 from typing import Any
 
+import time
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
@@ -24,6 +25,7 @@ class ArticleListView(LoginRequiredMixin,ListView):
     # This method customizes the queryset to show only articles
     # created by the logged-in user, ordered by creation time (newest first)
     def get_queryset(self) -> QuerySet[Any]:
+        time.sleep(2)
         search=self.request.GET.get("search")
         queryset = super().get_queryset().filter(creator=self.request.user)
         if search:
