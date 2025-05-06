@@ -24,7 +24,10 @@ class ArticleListView(LoginRequiredMixin,ListView):
     # This method customizes the queryset to show only articles
     # created by the logged-in user, ordered by creation time (newest first)
     def get_queryset(self) -> QuerySet[Any]:
+        search=self.request.GET.get("search")
         queryset = super().get_queryset().filter(creator=self.request.user)
+        if search:
+            queryset = queryset.filter(title__search=search)
         return queryset.order_by("-created_at")
 
 # -------------------------------
