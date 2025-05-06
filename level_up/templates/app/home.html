@@ -12,10 +12,8 @@
     <h1 class="title mb-4">Welcome</h1>
 
     <p class="text-xl mb-4">
-        You have created {{ user.article_count | intcomma }}
-        article {{ user.article_count | pluralize }}
-        and written {{ user.written_words | intcomma}}
-        word {{ user.written_words | pluralize}}.
+        You have created {{ user.article_count | intcomma }} article{{ user.article_count | pluralize }}
+        and written {{ user.written_words | intcomma}} word{{ user.written_words | pluralize}}.
     </p>
 
     <a class="button primary inline-block mb-6 w-full sm:w-auto text-center" href="{% url 'create_article' %}">Create article</a>
@@ -29,8 +27,9 @@
                 class="text-2xl flex items-center" 
                 href="{% url 'update_article' article.id %}">
                 {{ article.title }}
-                <span class="ml-2 px-4 py-0.5 text-xs rounded-sm uppercase bg-gray-200">{{article.status}}</span>
-            </a> <p class="text-sm"> {{ article.word_count }} word{{articles.word_count  | pluralize }}.</p>
+                <span class="ml-2 px-4 py-0.5 text-xs rounded-sm uppercase article-status-{{article.status}} ">{{article.status}}</span>
+            </a> 
+            <p class="text-sm"> {{ article.word_count }} word{{article.word_count | pluralize }}</p>
         </li>
     {% endfor %}
     </ul>

@@ -9,7 +9,7 @@ from app.managers import UserProfileManager
 
 ARTICLE_STATUS = (
     ("draft","draft"),
-    ("in progress","in progress"),
+    ("inprogress","inprogress"),
     ("published","published"),
 )
 
