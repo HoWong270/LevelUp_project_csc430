@@ -1,6 +1,10 @@
 from typing import Any
 
+from django.contrib import messages
+from django.http import HttpRequest, HttpResponse
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.query import QuerySet
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from app.models import Article
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView
@@ -72,6 +76,11 @@ class ArticleDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
      # Only allow deletion if the user is the creator of the article
     def test_func(self) -> bool | None:
         return self.request.user == self.get_object().creator
+    
+    def post(self, request: HttpRequest,*args:str, **kwargs:Any)-> HttpResponse:
+        messages.success(request,"Article deleted successfully.")
+        return super().post(request,*args,**kwargs)
+
 
 
 
