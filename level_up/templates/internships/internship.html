@@ -2,168 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Opportunities</title>
     <style>
         body {
-            background-color: #121212;
-            color: #f0f0f0;
             font-family: Arial, sans-serif;
-            margin: 0;
+            display: flex;
+            justify-content: space-between;
             padding: 20px;
-            height: 100vh;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #ffffff;
-            width: 100%;
-        }
-
-        h2 {
-            margin-top: 40px;
-            color: #ffcc00;
-        }
-
-        .internship-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            width: 100%;
-            height: calc(100vh - 120px); 
+        .sidebar {
+            width: 30%;
+            padding-right: 20px;
+            border-right: 2px solid #ddd;
         }
 
         .internship-section {
-            width: 48%; 
-            margin: 10px;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+            margin-bottom: 30px;
         }
 
-        .card {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-            margin-bottom: 10px;
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
 
-        .card h3 {
+        .internship-card {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .internship-card:hover {
+            transform: scale(1.05);
+        }
+
+        .internship-card h3 {
+            font-size: 1.2rem;
+        }
+
+        .internship-card p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .content {
+            width: 65%;
+            display: none;
+        }
+
+        .internship-details {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .internship-details h2 {
             margin-top: 0;
-            color: #61dafb;
-        }
-
-        .card p {
-            margin: 10px 0;
-        }
-
-        .card a {
-            color: #00c3ff;
-            text-decoration: none;
-        }
-
-        .card a:hover {
-            text-decoration: underline;
-        }
-
-        .no-opportunities {
-            font-style: italic;
-            color: #888;
         }
     </style>
 </head>
 <body>
-    <h1>Available Internships</h1>
-    <div class="internship-container">
-        <div class="internship-section">
-            <h2>Freshman Opportunities</h2>
-            <div class="internship-grid">
-                {% for internship in internships %}
-                    {% if "freshman" in internship.description|lower %}
-                        <div class="card">
-                            <h3>{{ internship.title }}</h3>
-                            <p><strong>Company:</strong> {{ internship.company }}</p>
-                            <p><strong>Location:</strong> {{ internship.location }}</p>
-                            <p>{{ internship.description }}</p>
-                            {% if internship.application_link %}
-                                <p><a href="{{ internship.application_link }}" target="_blank">Apply Here</a></p>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% empty %}
-                    <p class="no-opportunities">No internships available.</p>
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="internship-section">
-            <h2>Sophomore Opportunities</h2>
-            <div class="internship-grid">
-                {% for internship in internships %}
-                    {% if "sophomore" in internship.description|lower %}
-                        <div class="card">
-                            <h3>{{ internship.title }}</h3>
-                            <p><strong>Company:</strong> {{ internship.company }}</p>
-                            <p><strong>Location:</strong> {{ internship.location }}</p>
-                            <p>{{ internship.description }}</p>
-                            {% if internship.application_link %}
-                                <p><a href="{{ internship.application_link }}" target="_blank">Apply Here</a></p>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% empty %}
-                    <p class="no-opportunities">No internships available.</p>
-                {% endfor %}
-            </div>
-        </div>
+    <div class="sidebar">
+        <h1>Internship Opportunities</h1>
 
-        <div class="internship-section">
-            <h2>Junior Opportunities</h2>
-            <div class="internship-grid">
-                {% for internship in internships %}
-                    {% if "junior" in internship.description|lower %}
-                        <div class="card">
-                            <h3>{{ internship.title }}</h3>
-                            <p><strong>Company:</strong> {{ internship.company }}</p>
-                            <p><strong>Location:</strong> {{ internship.location }}</p>
-                            <p>{{ internship.description }}</p>
-                            {% if internship.application_link %}
-                                <p><a href="{{ internship.application_link }}" target="_blank">Apply Here</a></p>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% empty %}
-                    <p class="no-opportunities">No internships available.</p>
-                {% endfor %}
+        {% for level in levels %}
+            <div class="internship-section">
+                <h2>{{ level|title }} Opportunities</h2>
+                <div class="internship-grid">
+                    {% for internship in internships %}
+                        {% if internship.level == level %}
+                        <div class="internship-card" onclick="showInternshipDetails('{{ internship.id }}')">
+                                <h3>{{ internship.title }}</h3>
+                                <p>{{ internship.description|slice:":100" }}...</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+        {% endfor %}
+    </div>
 
-        <div class="internship-section">
-            <h2>Senior Opportunities</h2>
-            <div class="internship-grid">
-                {% for internship in internships %}
-                    {% if "senior" in internship.description|lower %}
-                        <div class="card">
-                            <h3>{{ internship.title }}</h3>
-                            <p><strong>Company:</strong> {{ internship.company }}</p>
-                            <p><strong>Location:</strong> {{ internship.location }}</p>
-                            <p>{{ internship.description }}</p>
-                            {% if internship.application_link %}
-                                <p><a href="{{ internship.application_link }}" target="_blank">Apply Here</a></p>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% empty %}
-                    <p class="no-opportunities">No internships available.</p>
-                {% endfor %}
-            </div>
+    <div class="content" id="details-content">
+        <div class="internship-details" id="internship-details">
+            <h2 id="internship-title">Title</h2>
+            <p id="internship-description">Description</p>
+            <p><strong>Level:</strong> <span id="internship-level">Level</span></p>
         </div>
     </div>
+
+    
+    {{ internships|json_script:"internships-data" }}
+
+    <script>
+        const internships = JSON.parse(document.getElementById('internships-data').textContent);
+
+        function showInternshipDetails(id) {
+            const internship = internships.find(item => item.id === id);
+            if (internship) {
+                document.getElementById('internship-title').innerText = internship.title;
+                document.getElementById('internship-description').innerText = internship.description;
+                document.getElementById('internship-level').innerText = internship.level;
+                document.getElementById('details-content').style.display = 'block';
+            }
+        }
+    </script>
+
 </body>
 </html>
+
+
+
+
+
+
+

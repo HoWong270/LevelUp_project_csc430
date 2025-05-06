@@ -68,12 +68,14 @@ class Article(models.Model):
 
 # Create your models here.
 class Internship(models.Model):
-    title = models.CharField(max_length=255)
-    company = models.CharField(max_length=255)
+    title = models.CharField(max_length=200)
     description = models.TextField()
-    location = models.CharField(max_length=255)
-    application_link = models.URLField(blank=True)
-    posted_at = models.DateTimeField(auto_now_add=True)
-
+    level = models.CharField(max_length=20, choices=[
+        ('freshman', 'Freshman'),
+        ('sophomore', 'Sophomore'),
+        ('junior', 'Junior'),
+        ('senior', 'Senior'),
+    ])
+    
     def __str__(self):
         return f"{self.title} at {self.company}"

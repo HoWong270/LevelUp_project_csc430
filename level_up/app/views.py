@@ -76,7 +76,9 @@ class ArticleDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 
 def internship_view(request):
     internships = Internship.objects.all()
-    return render(request, 'internships/internship.html', {'internships': internships})
+    levels = ["freshman", "sophomore", "junior", "senior"]
+    return render(request, 'internship.html', {'internships': internships, 'levels': levels})
+
 
 
 
