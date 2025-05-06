@@ -51,7 +51,11 @@
 
 
   .form-field input {
-    @apply w-full rounded-md p-2;
+    @apply w-full rounded-md p-2 mt-1;
+  }
+
+  details > summary::-webkit-details-marker {
+    display: none;
   }
 
   
