@@ -18,14 +18,14 @@ class ArticleListView(LoginRequiredMixin,ListView):
     template_name = "app/home.html"
     model = Article
     context_object_name = "articles"
+    paginate_by = 5
 
 
     # This method customizes the queryset to show only articles
     # created by the logged-in user, ordered by creation time (newest first)
     def get_queryset(self) -> QuerySet[Any]:
-        return Article.objects.filter(creator=self.request.user).order_by("-created_at")
-
-
+        queryset = super().get_queryset().filter(creator=self.request.user)
+        return queryset.order_by("-created_at")
 
 # -------------------------------
 # ArticleCreateView
@@ -43,8 +43,6 @@ class ArticleCreateView(LoginRequiredMixin,CreateView):
         form.instance.creator = self.request.user
         return super().form_valid(form)
     
-
-
 # -------------------------------
 # ArticleUpdateView
 # -------------------------------
@@ -78,7 +76,7 @@ class ArticleDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         return self.request.user == self.get_object().creator
     
     def post(self, request: HttpRequest,*args:str, **kwargs:Any)-> HttpResponse:
-        messages.success(request,"Article deleted successfully.")
+        messages.success(request,"Article deleted successfully.", extra_tags="error")
         return super().post(request,*args,**kwargs)
 
 
