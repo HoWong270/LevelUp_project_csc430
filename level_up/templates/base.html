@@ -55,13 +55,14 @@
         </div>
     </nav>
 
-    <div class="p-2 md:p-4 lg:p-6">
+    {% comment %} <div class="p-2 md:p-4 lg:p-6"> {% endcomment %}
     {% block base_content %}
 
     {% endblock base_content %}    
     </div>
-    {% block extra_body %}
-    {% endblock extra_body %}
+
+    {% comment %} {% block extra_body %}
+    {% endblock extra_body %} {% endcomment %}
     {% block page_js %}
 
     {%endblock page_js %}
