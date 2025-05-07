@@ -411,3 +411,5 @@ level_up/node_modules/util-deprecate/package.json
 level_up/node_modules/util-deprecate/README.md
 *env*
 level_up/mailgun_test.py
+__pycache__/
+*.pyc
