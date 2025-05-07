@@ -59,7 +59,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount.providers.github",
     "django_browser_reload",
     "widget_tweaks",
-    "anymail",
+    # "anymail",
 
 ]
 
@@ -158,12 +158,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-DEFAULT_FROM_EMAIL = os.getenv("MAILGUN_EMAIL","None")
 
-ANYMAIL = {
-    "MAILGUN_API_KEY": os.getenv("MAILGUN_EMAIL","None"),
-    "SEND_DEFAULTS": {"tags": ["levelup"]}
-}
+#account issues has to be resolved first
+# DEFAULT_FROM_EMAIL = os.getenv("MAILGUN_EMAIL","None")
+
+# ANYMAIL = {
+#     "MAILGUN_API_KEY": os.getenv("MAILGUN_EMAIL","None"),
+#     "SEND_DEFAULTS": {"tags": ["levelup"]}
+# }
 
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 
@@ -179,8 +181,8 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_VERIFICATION = True
-ACCOUNT_SIGNUP_PASWORD_ENTER_TWICE = False
+ACCOUNT_EMAIL_VERIFICATION = False
+# ACCOUNT_SIGNUP_PASWORD_ENTER_TWICE = "true"
 
 
 # Internationalization
