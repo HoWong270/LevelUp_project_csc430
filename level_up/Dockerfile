@@ -19,4 +19,5 @@ RUN chmod 755 /code/start-level_up.sh
 
 EXPOSE 8000
 
-ENTRYPOINT [ "/code/start-level_up.sh"]
+ENTRYPOINT [ "/code/start-level_up.sh" ]
+
