@@ -1,6 +1,11 @@
 from typing import Any
 
+import time
+from django.contrib import messages
+from django.http import HttpRequest, HttpResponse
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.query import QuerySet
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from app.models import Article
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView
@@ -15,14 +20,18 @@ class ArticleListView(LoginRequiredMixin,ListView):
     template_name = "app/home.html"
     model = Article
     context_object_name = "articles"
+    paginate_by = 5
 
 
     # This method customizes the queryset to show only articles
     # created by the logged-in user, ordered by creation time (newest first)
     def get_queryset(self) -> QuerySet[Any]:
-        return Article.objects.filter(creator=self.request.user).order_by("-created_at")
-
-
+        time.sleep(2)
+        search=self.request.GET.get("search")
+        queryset = super().get_queryset().filter(creator=self.request.user)
+        if search:
+            queryset = queryset.filter(title__search=search)
+        return queryset.order_by("-created_at")
 
 # -------------------------------
 # ArticleCreateView
@@ -40,8 +49,6 @@ class ArticleCreateView(LoginRequiredMixin,CreateView):
         form.instance.creator = self.request.user
         return super().form_valid(form)
     
-
-
 # -------------------------------
 # ArticleUpdateView
 # -------------------------------
@@ -73,6 +80,11 @@ class ArticleDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
      # Only allow deletion if the user is the creator of the article
     def test_func(self) -> bool | None:
         return self.request.user == self.get_object().creator
+    
+    def post(self, request: HttpRequest,*args:str, **kwargs:Any)-> HttpResponse:
+        messages.success(request,"Article deleted successfully.", extra_tags="error")
+        return super().post(request,*args,**kwargs)
+
 
 def internship_view(request):
     internships = Internship.objects.all()
