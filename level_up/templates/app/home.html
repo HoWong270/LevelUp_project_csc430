@@ -33,7 +33,8 @@
             hx-target="#article-results"
             hx-select="#article-results"
             hx-indicator="svg.loading"
-            hx-disabled-elt="next button">
+            hx-disabled-elt="next button"
+            hx-push-url="true">
         <button class="flex gap-1 button secondary items-center justify-center [&>.loading.htmx-request.hidden]:!inline-block [&>.loading.htmx-request]:hidden disabled:cursor-not-allowed disabled:opacity-50" type="submit">
             {% include "app/svgs/magnifier.svg" with class="loading w-6 h-6 mr-2"%}
             {% include "app/svgs/loading.svg" with class="loading w-6 h-6 mr-2 hidden motion-safe:animate-spin"%}

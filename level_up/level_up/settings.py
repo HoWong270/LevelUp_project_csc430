@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 import dj_database_url
 
@@ -157,6 +157,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DEFAULT_FROM_EMAIL = os.getenv("MAILGUN_EMAIL","None")
+
+ANYMAIL = {
+    "MAILGUN_API_KEY": os.getenv("MAILGUN_EMAIL","None"),
+    "SEND_DEFAULTS": {"tags": ["levelup"]}
+}
+
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/articles/"
 LOGOUT_REDIRECT_URL = ""
@@ -169,7 +178,8 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_SIGNUP_PASWORD_ENTER_TWICE = False
 
 
 # Internationalization
