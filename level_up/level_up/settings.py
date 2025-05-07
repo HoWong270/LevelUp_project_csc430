@@ -59,6 +59,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount.providers.github",
     "django_browser_reload",
     "widget_tweaks",
+    "anymail",
 
 ]
 

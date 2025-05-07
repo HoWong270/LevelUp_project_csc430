@@ -67,15 +67,15 @@ class Article(models.Model):
 
 
 # Create your models here.
-class Internship(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    level = models.CharField(max_length=20, choices=[
-        ('freshman', 'Freshman'),
-        ('sophomore', 'Sophomore'),
-        ('junior', 'Junior'),
-        ('senior', 'Senior'),
-    ])
+# class Internship(models.Model):
+#     title = models.CharField(max_length=200)
+#     description = models.TextField()
+#     level = models.CharField(max_length=20, choices=[
+#         ('freshman', 'Freshman'),
+#         ('sophomore', 'Sophomore'),
+#         ('junior', 'Junior'),
+#         ('senior', 'Senior'),
+#     ])
     
-    def __str__(self):
-        return f"{self.title} at {self.company}"
+#     def __str__(self):
+#         return f"{self.title} at {self.company}"

@@ -11,7 +11,7 @@ from app.models import Article
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.shortcuts import render
-from .models import Internship
+# from .models import Internship
 
 # This view displays a list of articles.
 # Only logged-in users can access this view, enforced by LoginRequiredMixin.
@@ -86,10 +86,10 @@ class ArticleDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         return super().post(request,*args,**kwargs)
 
 
-def internship_view(request):
-    internships = Internship.objects.all()
-    levels = ["freshman", "sophomore", "junior", "senior"]
-    return render(request, 'internship.html', {'internships': internships, 'levels': levels})
+# def internship_view(request):
+#     internships = Internship.objects.all()
+#     levels = ["freshman", "sophomore", "junior", "senior"]
+#     return render(request, 'internship.html', {'internships': internships, 'levels': levels})
 
 
 
